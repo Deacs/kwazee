@@ -1,0 +1,15 @@
+extends layout
+
+block content
+
+	h1= title
+	form( method="post")
+		div
+			div
+				span Title :
+				input(type="text", name="title", id="editArticleTitle")
+			div
+				span Body :
+				textarea( name="body", rows, id="editArticleBody")
+			div#editArticelSubmit
+				input(type="submit", value="Send")

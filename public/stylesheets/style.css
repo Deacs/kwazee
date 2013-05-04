@@ -32,6 +32,9 @@ h1 {
   text-decoration: underline;
   background-color: #eee;
 }
+#articles .article .title a {
+  color: #f00;
+}
 #articles .article .body {
   background-color: #ffa;
 }

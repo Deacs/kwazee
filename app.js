@@ -57,7 +57,11 @@ app.get('/blog/:id', function(req, res) {
   articleProvider.findById(req.params.id, function(error, article) {
     res.render('blog_show.jade', {
       title: article.title,
-      article: article
+      article: article,
+      // Always ensure that we have a value for the comments
+      // Prevents the temaplate throwing an error when there are 
+      // no comments stored against the article
+      comments: typeof article.comments !== "undefined" ? article.comments : []
     });
   });
 });

@@ -64,9 +64,9 @@ ArticleProvider.prototype.save = function(articles, callback) {
 				article = articles[i];
 				article.created_at = new Date();
 				if (article.comments === undefined) {
-					articles.comments = [];
+					article.comments = [];
 
-					for (var j = 0; j < articles.comments.length; j++) {
+					for (var j = 0; j < article.comments.length; j++) {
 						article.comments[j].created_at = new Date();
 					}
 				}
@@ -75,6 +75,25 @@ ArticleProvider.prototype.save = function(articles, callback) {
 			article_collection.insert(articles, function() {
 				callback(null, articles);
 			});
+		}
+	});
+};
+
+ArticleProvider.prototype.addCommentToArticle = function(articleId, comment, callback) {
+	this.getCollection(function (error, article_collection) {
+		if (error) {
+			callback(error);
+		} else {
+			article_collection.update(
+				{_id: article_collection.db.bson_serializer.ObjectID.createFromHexString(articleId)},
+				{"$push": {comments: comment}},
+				function(error, article) {
+					if( error ) {
+						callback(error);
+					} else {
+						callback(null, article);
+					}
+				});
 		}
 	});
 };

@@ -68,31 +68,26 @@ app.get('/blog/:id', function(req, res) {
 });
 
 app.get('/blog/delete/:id', function(req, res) {
-  // Debug that we ae actually calling the correct function
-  console.log('Preparing to delete: '+req.params.id);
-
   articleProvider.removeArticle(
     req.params.id
     , function(error, docs) {
       res.redirect('/');
     });
-  res.end();
+});
 
-  // Update the record to include a new value of deleted = true
-  // We don't want to actually remove the post right now
-  // The find handlers will need to be updated to filter out any results that have the deleted value present
-  // 
-  // 
-  // articleProvider.findById(req.params.id, function(error, article) {
-  //   res.render('blog_delete.jade', {
-  //     title: article.title,
-  //     article: article,
-  //     // Always ensure that we have a value for the comments
-  //     // Prevents the template throwing an error when there are 
-  //     // no comments stored against the article
-  //     comments: typeof article.comments !== "undefined" ? article.comments : []
-  //   });
-  // });
+app.post('/blog/updatePost', function(req, res) {
+  // console.log('Update the Post: '+req.param('_id'));
+  // console.log('Title: '+req.param('title'));
+  // console.log('Body: '+req.param('body'));
+  // res.end();
+  articleProvider.updateArticle(
+    req.param('_id'),
+    {
+      title:  req.param('title'),
+      body:   req.param('body')
+    }, function(error, docs) {
+      res.redirect('/blog/' + req.param('_id'));
+  });
 });
 
 app.post('/blog/addComment', function(req, res) {
@@ -103,6 +98,13 @@ app.post('/blog/addComment', function(req, res) {
     }, function(error, docs) {
       res.redirect('/blog/' + req.param('_id'));
     });
+});
+
+// PENDING
+app.get('/blog/removeComment', function(req, res) {
+  articleProvider.removeComment(req.param('commentId'));
+  console.log('Removing Comment: '+req.param('commentId'));
+  res.end();
 });
 
 app.listen(3000);

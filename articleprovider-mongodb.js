@@ -79,6 +79,29 @@ ArticleProvider.prototype.save = function(articles, callback) {
 	});
 };
 
+ArticleProvider.prototype.updateArticle = function(articleId, article, callback) {
+	this.getCollection(function (error, article_collection) {
+		if (error) {
+			callback(error);
+		} else {
+			article_collection.update(
+				{_id: ObjectID(articleId)},
+				{
+					$set: 	{	'title': 		article.title, 
+								'body': 		article.body,
+								'updated_at': 	new Date()}
+				},
+			function(error, article) {
+				if (error) {
+					callback(error);
+				} else {
+					callback(null, article);
+				}
+			});
+		}
+	});
+};
+
 ArticleProvider.prototype.removeArticle = function(articleId, callback) {
 	this.getCollection(function (error, article_collection) {
 		if (error) {
@@ -94,18 +117,6 @@ ArticleProvider.prototype.removeArticle = function(articleId, callback) {
 					}
 				}
 			);
-			// article_collection.update(
-			// 	{_id: article_collection.db.bson_serializer.ObjectID.createFromHexString(articleId)},
-			// 	{"$push": {deleted: true}},
-			// 	function(error, article) {
-			// 		if( error ) {
-			// 			callback(error);
-			// 		} else {
-			// 			console.log('Updated : '+articleId);
-			// 			console.log(article);
-			// 			callback(null, article);
-			// 		}
-			// 	});
 		}
 	}); 
 };

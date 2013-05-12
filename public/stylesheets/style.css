@@ -15,6 +15,12 @@ h1 {
   text-shadow: 1px 2px 2px #ddd;
   font-size: 60px;
 }
+.odd {
+  background-color: #fff;
+}
+.even {
+  background-color: #f5f7f8;
+}
 #articles {
   text-align: left;
   margin-left: auto;
@@ -35,19 +41,46 @@ h1 {
 #articles .article .body {
   background-color: #ffa;
 }
-.article .created_at {
-  display: none;
+.article .body {
+  font-size: 2.5em;
 }
-.article input[type =text] {
+.article .created_at {
+  color: #999;
+}
+.article .comment_wrapper {
+  margin: 20px;
+  background-color: #ffc;
+  font-size: 1em;
+}
+.article .comment_wrapper .comment {
+  float: left;
+  width: 100%;
+  text-align: left;
+  padding: 5px 0;
+}
+.article .comment_wrapper .comment .comment {
+  float: left;
+  font-size: 1.25em;
+  text-align: left;
+  margin: 0;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+.article .comment_wrapper .comment .person {
+  float: right;
+  margin-right: 20px;
+  color: #666;
+}
+.article .comment_wrapper input[type =text] {
   width: 490px;
   margin-left: 16px;
 }
-.article input[type =button],
-.article input[type =submit] {
+.article .comment_wrapper input[type =button],
+.article .comment_wrapper input[type =submit] {
   text-align: left;
   margin-left: 440px;
 }
-.article textarea {
+.article .comment_wrapper textarea {
   width: 490px;
   height: 90px;
 }

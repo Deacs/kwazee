@@ -56,14 +56,29 @@ app.post('/blog/new', function(req, res) {
 app.get('/blog/:id', function(req, res) {
   articleProvider.findById(req.params.id, function(error, article) {
     res.render('blog_show.jade', {
+      id: article._id,
       title: article.title,
       article: article,
       // Always ensure that we have a value for the comments
-      // Prevents the temaplate throwing an error when there are 
+      // Prevents the template throwing an error when there are 
       // no comments stored against the article
       comments: typeof article.comments !== "undefined" ? article.comments : []
     });
   });
+});
+
+app.get('/blog/delete/:id', function(req, res) {
+  console.log('Preparing to delete: '+req.params.id);
+  // articleProvider.findById(req.params.id, function(error, article) {
+  //   res.render('blog_delete.jade', {
+  //     title: article.title,
+  //     article: article,
+  //     // Always ensure that we have a value for the comments
+  //     // Prevents the template throwing an error when there are 
+  //     // no comments stored against the article
+  //     comments: typeof article.comments !== "undefined" ? article.comments : []
+  //   });
+  // });
 });
 
 app.post('/blog/addComment', function(req, res) {

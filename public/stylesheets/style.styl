@@ -4,14 +4,18 @@ body
   text-align center
   text-stroke 1px rgba(255, 255, 255, 0.1)
   color #555
- h1, h2
+h1, h2
  	margin 0
  	font-size 22px
  	color #343434
- h1
+h1
  	text-shadow 1px 2px 2px #ddd
  	font-size 60px
- #articles
+.odd
+ 	background-color #fff
+.even
+	background-color #F5F7F8
+#articles
  	text-align left
  	margin-left auto
  	margin-right auto
@@ -26,9 +30,31 @@ body
  			background-color #eee
  		.body
  			background-color #ffa
- .article
- 	.created_at
- 		display none
+.article
+	.body
+		font-size 2.5em
+	.created_at
+		color #999
+	.comment_wrapper
+		margin 20px
+		background-color #ffc
+		font-size 1em
+		.comment
+			float left
+			width 100%
+			text-align left
+			padding 5px 0
+			.comment
+				float left
+				font-size 1.25em
+				text-align left
+				margin 0
+				margin-bottom 10px
+				padding-left 10px
+			.person
+				float right
+				margin-right 20px
+				color #666
  	input[type =text]
  		width 490px
  		margin-left 16px

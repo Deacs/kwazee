@@ -21,6 +21,19 @@ h1 {
 .even {
   background-color: #f5f7f8;
 }
+.remove {
+  display: inline-block;
+  margin-left: 15px;
+  font-size: 0.5em;
+  text-decoration: none;
+  color: #f00;
+  vertical-align: top;
+  padding-top: 0.75em;
+}
+.add {
+  color: #008000;
+  text-decoration: none;
+}
 #articles {
   text-align: left;
   margin-left: auto;

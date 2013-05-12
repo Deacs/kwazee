@@ -7,7 +7,7 @@ block content
 			div.created_at= article.created_at
 			//div.title= article.title
 			div.body= article.body
-				a(href="/blog/"+article._id.toHexString()) Remove
+				a(href="/blog/delete/"+article._id.toHexString(), class='remove', title='Remove this post') [X]
 			div.comment_wrapper
 				- var i = -1
 				- each comment in comments

@@ -68,7 +68,21 @@ app.get('/blog/:id', function(req, res) {
 });
 
 app.get('/blog/delete/:id', function(req, res) {
+  // Debug that we ae actually calling the correct function
   console.log('Preparing to delete: '+req.params.id);
+
+  articleProvider.removeArticle(
+    req.params.id
+    , function(error, docs) {
+      res.redirect('/');
+    });
+  res.end();
+
+  // Update the record to include a new value of deleted = true
+  // We don't want to actually remove the post right now
+  // The find handlers will need to be updated to filter out any results that have the deleted value present
+  // 
+  // 
   // articleProvider.findById(req.params.id, function(error, article) {
   //   res.render('blog_delete.jade', {
   //     title: article.title,

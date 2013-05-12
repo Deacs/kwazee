@@ -79,6 +79,37 @@ ArticleProvider.prototype.save = function(articles, callback) {
 	});
 };
 
+ArticleProvider.prototype.removeArticle = function(articleId, callback) {
+	this.getCollection(function (error, article_collection) {
+		if (error) {
+			callback(error);
+		} else {
+			article_collection.remove({_id: ObjectID(articleId)},
+				function(error, articleId) {
+					if (error) {
+						callback(error);
+					}
+					else {
+						callback(null, article);
+					}
+				}
+			);
+			// article_collection.update(
+			// 	{_id: article_collection.db.bson_serializer.ObjectID.createFromHexString(articleId)},
+			// 	{"$push": {deleted: true}},
+			// 	function(error, article) {
+			// 		if( error ) {
+			// 			callback(error);
+			// 		} else {
+			// 			console.log('Updated : '+articleId);
+			// 			console.log(article);
+			// 			callback(null, article);
+			// 		}
+			// 	});
+		}
+	}); 
+};
+
 ArticleProvider.prototype.addCommentToArticle = function(articleId, comment, callback) {
 	this.getCollection(function (error, article_collection) {
 		if (error) {

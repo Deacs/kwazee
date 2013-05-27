@@ -1,0 +1,19 @@
+extends layout
+
+block content
+
+	h1= title
+	
+	div.created_at= article.created_at
+	
+	p.
+		Selected Article ID: #{article._id}
+
+	p.
+		Selected Comment Index: #{commentIndex}
+
+	div
+		- each comment, i in comments
+			div(class=(i == commentIndex) ? 'highlight' : '')
+				div= comment.comment
+

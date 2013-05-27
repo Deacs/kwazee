@@ -5,7 +5,6 @@ block content
 	h1= title
 	div.article
 			div.created_at= article.created_at
-			//div.title= article.title
 
 			div.body= article.body
 				
@@ -19,20 +18,21 @@ block content
 				a(href="/blog/delete/"+article._id.toHexString(), class='remove', title='Remove this post') [X]
 
 			div.comment_wrapper
-				- var i = -1
-				- each comment in comments
-					- ++i
+				- each comment, i in comments
 					div(class=(i % 2 == 0) ? 'comment odd' : 'comment even')
 						div.comment= comment.comment
+							span.remove_comment 
+								a(href="/blog/removeComment/"+article._id.toHexString()+"/"+comment.id+"/", class='remove', title='Remove this comment') [X]		
 						div.person= comment.person
-			div
+			div.form_wrapper
 				form(method="post", action="/blog/addComment")
 					input(type="hidden", name="_id", value=article._id.toHexString())
 					div
 						span Author :
-						input(type="text", name="person", id="adCommentPerson")
+						input(type="text", name="person", id="addCommentPerson")
 					div
 						span Comment : 
 						textarea(name="comment", rows=5, id="addCommentComment")
 					div#editArticleSubmit
 						input(type="submit", value="Send")
+

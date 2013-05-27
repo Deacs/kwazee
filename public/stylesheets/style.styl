@@ -15,6 +15,9 @@ h1
  	background-color #fff
 .even
 	background-color #F5F7F8
+.highlight
+	color red
+	font-weight 700
 .remove
 	display inline-block
 	margin-left 15px
@@ -47,9 +50,19 @@ h1
 	.created_at
 		color #999
 	.comment_wrapper
-		margin 20px
+		margin 20px auto
 		background-color #ffc
 		font-size 1em
+		border 1px solid #000
+		width 700px	
+		.remove_comment
+			width 2em
+			float left
+			.remove
+				font-size .75em
+				padding 0
+				padding-top .125em
+				margin 0
 		.comment
 			float left
 			width 100%
@@ -66,6 +79,11 @@ h1
 				float right
 				margin-right 20px
 				color #666
+	.form_wrapper
+		width 700px
+		float none
+		clear left
+		margin 20px auto
  	input[type =text]
  		width 490px
  		margin-left 16px

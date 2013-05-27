@@ -1,7 +1,7 @@
 // http://howtonode.org/express-mongodb
 
 var express = require('express');
-// var ArticleProvider = require('./articleprovider-memory.js').ArticleProvi der;
+// var ArticleProvider = require('./articleprovider-memory.js').ArticleProvider;
 var ArticleProvider = require('./articleprovider-mongodb.js').ArticleProvider;
 
 // var app = module.exports = express.createServer(); // DEPRECATED
@@ -76,10 +76,6 @@ app.get('/blog/delete/:id', function(req, res) {
 });
 
 app.post('/blog/updatePost', function(req, res) {
-  // console.log('Update the Post: '+req.param('_id'));
-  // console.log('Title: '+req.param('title'));
-  // console.log('Body: '+req.param('body'));
-  // res.end();
   articleProvider.updateArticle(
     req.param('_id'),
     {
@@ -92,6 +88,7 @@ app.post('/blog/updatePost', function(req, res) {
 
 app.post('/blog/addComment', function(req, res) {
   articleProvider.addCommentToArticle(req.param('_id'), {
+    id: new Date().getTime(),
     person: req.param('person'),
     comment: req.param('comment'),
     created_at: new Date()
@@ -100,11 +97,13 @@ app.post('/blog/addComment', function(req, res) {
     });
 });
 
-// PENDING
-app.get('/blog/removeComment', function(req, res) {
-  articleProvider.removeComment(req.param('commentId'));
-  console.log('Removing Comment: '+req.param('commentId'));
-  res.end();
+app.get('/blog/removeComment/:id/:commentIndex', function(req, res) {
+  articleProvider.findById(req.params.id, function(error, article) {
+    articleProvider.removeArticleComment(req.param('id'), article, req.param('commentIndex'), function(error, docs) {
+      res.redirect('/blog/'+req.param('id'));
+      res.end();
+    });
+  });
 });
 
 app.listen(3000);

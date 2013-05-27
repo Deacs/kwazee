@@ -102,6 +102,28 @@ ArticleProvider.prototype.updateArticle = function(articleId, article, callback)
 	});
 };
 
+ArticleProvider.prototype.removeArticleComment = function(articleId, article, commentId, callback) {
+	this.getCollection(function (error, article_collection) {
+		if (error) {
+			callback(error);
+		} else {			
+			article_collection.update(
+				{ _id: article_collection.db.bson_serializer.ObjectID.createFromHexString(articleId) }, 
+				{ 
+					$pull : { "comments" : { "id" : parseInt(commentId) }} // Cannot accept a var?!
+				},
+				function(error, article) {
+					if (error) {
+						callback(error);
+					} else {
+						callback(null, article);
+					}
+				}
+			);
+		}
+	}); 
+};
+
 ArticleProvider.prototype.removeArticle = function(articleId, callback) {
 	this.getCollection(function (error, article_collection) {
 		if (error) {

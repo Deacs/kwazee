@@ -97,6 +97,7 @@ app.post('/blog/addComment', function(req, res) {
     });
 });
 
+// New: remove a comment from a post
 app.get('/blog/removeComment/:id/:commentIndex', function(req, res) {
   articleProvider.findById(req.params.id, function(error, article) {
     articleProvider.removeArticleComment(req.param('id'), article, req.param('commentIndex'), function(error, docs) {

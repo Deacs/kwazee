@@ -110,7 +110,7 @@ ArticleProvider.prototype.removeArticleComment = function(articleId, article, co
 			article_collection.update(
 				{ _id: article_collection.db.bson_serializer.ObjectID.createFromHexString(articleId) }, 
 				{ 
-					$pull : { "comments" : { "id" : parseInt(commentId) }} // Cannot accept a var?!
+					$pull : { "comments" : { "id" : parseInt(commentId) }}
 				},
 				function(error, article) {
 					if (error) {
